@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Protected Page</title>
+</head>
+<body>
+  <h1>Welcome to the protected page!</h1>
+  <p>You have successfully logged in.</p>
+  <form action="{{ url_for('logout') }}" method="post">
+    <input type="submit" value="Logout">
+  </form>
+</body>
+</html>

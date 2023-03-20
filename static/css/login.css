@@ -1,0 +1,33 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    background-image: url("/static/img/foodbackground.jpg");
+    background-size: cover;
+  }
+
+form {
+    height: 20vh;
+    width: 50vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background-image: linear-gradient(rgb(104, 88, 75), rgb(99, 77, 60));
+
+}
+
+form * {
+    border: 0px;
+}
+
+h1 {
+    color: rgb(255, 255, 255);
+    font-weight: bolder;
+    border: solid, 10px;
+}

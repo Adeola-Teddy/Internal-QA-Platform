@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+<body>
+  <h1 class="title">The Recipe Collection</h1>
+  {% if error %}
+    <p>{{ error }}</p>
+  {% endif %}
+  <form method="POST" action="{{ url_for('login') }}">
+    <div>
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+    </div>
+    <div>
+      <input type="submit" value="Login">
+    </div>
+  </form>
+  <a href="signup">Not already a user? Click here to sign up!</a>
+</body>
+</html>

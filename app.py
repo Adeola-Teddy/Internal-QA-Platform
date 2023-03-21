@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, request
-from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required
+from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 import os
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
@@ -33,6 +33,15 @@ class UsersDB(db.Model):
 
     def __repr__(self):
         return '<User %r>' % self.username
+# QUESTIONS DATABASE #
+class QuestionDB(db.Model):
+    __tablename__ = 'questions'
+    id = db.Column(db.Integer, primary_key=True)
+    author_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    body = db.Column(db.String(20), nullable=False)
+    upvotes = db.Column(db.Integer)
+
+    author = db.relationship('UsersDB', backref=db.backref('questions', lazy=True))
 #CREATES THE DATABASE
 with app.app_context():
     db.create_all()
@@ -69,11 +78,7 @@ def login():
             return render_template('login.html', error='Invalid username or password')
     else:
         return render_template('login.html')
-#PROTECTED PAGE (Q&A PAGE)
-@app.route('/protected')
-@login_required
-def protected():
-    return render_template('protected.html')
+
 #LOGOUT OF WEBSITE (STILL IN PROTECTED PAGE)
 @app.route('/logout', methods=['GET', 'POST'])
 @login_required
@@ -102,3 +107,24 @@ def index():
         else:
             return(render_template('signup.html', form=form, error='Username already taken.'))
     return(render_template('signup.html', form=form, error = ""))
+
+#PROTECTED PAGE (Q&A PAGE)
+class QuestionForm(FlaskForm):
+    question = StringField('question')
+    submit = SubmitField('Submit')
+
+@app.route('/protected', methods=['GET', 'POST'])
+@login_required
+def protected():
+    s = str(current_user)
+    username1 = s.replace('<User ', '').replace('>', '')
+
+    question_form = QuestionForm()
+    if request.method == 'POST':
+        if question_form.validate_on_submit():
+            user = UsersDB.query.filter_by(username=username1).first()
+            new_question = QuestionDB(author=user, body=question_form.question.data, upvotes=0)
+            db.session.add(new_question)
+            db.session.commit()
+
+    return render_template('protected.html', user_logged=username1,  form1=question_form)

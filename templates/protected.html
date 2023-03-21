@@ -5,7 +5,14 @@
 </head>
 <body>
   <h1>Welcome to the protected page!</h1>
-  <p>You have successfully logged in.</p>
+  <p>You have successfully logged in {{user_logged}}.</p>
+
+  <form class="question-form" method="POST">
+    {{ form1.hidden_tag() }}
+    {{ form1.question.label }} {{ form1.question() }}<br>
+    {{ form1.submit() }}
+  </form>
+
   <form action="{{ url_for('logout') }}" method="post">
     <input type="submit" value="Logout">
   </form>

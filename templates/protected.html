@@ -13,6 +13,20 @@
     {{ form1.submit() }}
   </form>
 
+  <h2>All Questions:</h2>
+  {% for question in questions %}
+    <div class="question">
+      <h3>{{ question.author }}</h3>
+      <p>{{ question.body }}</p>
+      <form action="{{ url_for('get_reply', question_id=question.id) }}" method="GET">
+        <button type="submit">View/Send Answer</button>
+      </form>
+      <p>Upvotes: {{ question.upvotes }}</p>
+      <p>Replies:{{question.replies}}</p>
+    </div>
+  {% endfor %}
+
+
   <form action="{{ url_for('logout') }}" method="post">
     <input type="submit" value="Logout">
   </form>

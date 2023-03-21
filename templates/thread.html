@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Question {{reply.id}}</title>
+</head>
+<body>
+    <h1>Question: {{reply.body}}</h1>
+    <p>By: {{user.username}}</p>
+    <form class="question-form" method="POST">
+        {{ form1.hidden_tag() }}
+        {{ form1.answer.label }} {{ form1.answer() }}<br>
+        {{ form1.submit() }}
+      </form>
+    <h2>Answers</h2>
+    {% for answer in answers %}
+    <div class="answer">
+      <h3>{{ answer.author_id }}</h3>
+      <p>{{ answer.body }}</p>
+      <p>Upvotes: {{ answer.upvotes }}</p>
+    </div>
+  {% endfor %}
+    <form action="{{ url_for('protected') }}" method="GET">
+        <button type="submit">Back Home</button>
+    </form>
+</body>
+</html>

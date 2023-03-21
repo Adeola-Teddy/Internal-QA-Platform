@@ -40,8 +40,21 @@ class QuestionDB(db.Model):
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     body = db.Column(db.String(20), nullable=False)
     upvotes = db.Column(db.Integer)
+    replies = db.Column(db.Integer)
 
     author = db.relationship('UsersDB', backref=db.backref('questions', lazy=True))
+
+# ASNWERS DATABASE #
+class  AnswerDB(db.Model):
+    __tablename__  = 'answers'
+    id = db.Column(db.Integer, primary_key=True)
+    body = db.Column(db.String(20), nullable=False)
+    upvotes = db.Column(db.Integer)
+    author_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    question_id = db.Column(db.Integer, db.ForeignKey('questions.id'), nullable=False)
+
+    author = db.relationship('UsersDB', backref=db.backref('answers', lazy=True))
+    question = db.relationship('QuestionDB', backref=db.backref('answers', lazy=True))
 #CREATES THE DATABASE
 with app.app_context():
     db.create_all()
@@ -123,8 +136,37 @@ def protected():
     if request.method == 'POST':
         if question_form.validate_on_submit():
             user = UsersDB.query.filter_by(username=username1).first()
-            new_question = QuestionDB(author=user, body=question_form.question.data, upvotes=0)
+            new_question = QuestionDB(author=user, body=question_form.question.data, upvotes=0, replies=0)
             db.session.add(new_question)
             db.session.commit()
 
-    return render_template('protected.html', user_logged=username1,  form1=question_form)
+    questions = QuestionDB.query.all()
+
+    return render_template('protected.html', user_logged=username1,  form1=question_form, questions=questions)
+
+
+class AnswerForm(FlaskForm):
+    answer = StringField('answer')
+    submit = SubmitField('Submit')
+
+@app.route('/protected/<int:question_id>', methods=['GET', 'POST'])
+@login_required
+def get_reply(question_id):
+    answerForm = AnswerForm()
+
+    s = str(current_user)
+    username1 = s.replace('<User ', '').replace('>', '')
+
+    reply = session.query(QuestionDB).filter_by(id=question_id).first()
+    qustionAuthor = session.query(UsersDB).filter_by(id=reply.author_id).first()
+    answerAuthor  = session.query(UsersDB).filter_by(username =  username1).first()
+
+    if request.method == 'POST':
+        if answerForm.validate_on_submit():
+            new_question = AnswerDB(author_id=answerAuthor.id, question_id=question_id, body=answerForm.answer.data, upvotes=0)
+            db.session.add(new_question)
+            db.session.commit()
+
+    answers = session.query(AnswerDB).filter_by(question_id=question_id).all()
+
+    return render_template('thread.html', reply = reply,  user = qustionAuthor, form1 = answerForm, answers=answers)

@@ -17,14 +17,14 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 
 basedir = os.path.abspath(os.path.dirname(__file__))
-
+#DATABASE CONNECTION
 if not os.path.exists(os.path.join(basedir, 'mydatabase.sqlite')):
     conn = sqlite3.connect(os.path.join(basedir, 'mydatabase.sqlite'))
     conn.close()
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'mydatabase.sqlite')
 db = SQLAlchemy(app)
-
+# USER DATABASE #
 class UsersDB(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
@@ -33,11 +33,11 @@ class UsersDB(db.Model):
 
     def __repr__(self):
         return '<User %r>' % self.username
-
+#CREATES THE DATABASE
 with app.app_context():
     db.create_all()
 
-
+# USER FOR THE FORMS AND FLASK_LOGIN #
 # Define user model
 class User(UserMixin):
     def __init__(self, id):
@@ -46,18 +46,15 @@ class User(UserMixin):
     def __repr__(self):
         return f"<User {self.id}>"
 
-# Define some users
-
-users = {'foo': {'password': 'bar'}, 'baz': {'password': 'qux'}}
-
+#CONNECTS THE DATABSE TO WEBPAGE/FORMS
 engine = create_engine('sqlite:///' + os.path.join(basedir, 'mydatabase.sqlite'))
 Session = sessionmaker(bind=engine)
 session = Session()
-
+#INBUILT FLASK_LOGIN
 @login_manager.user_loader
 def load_user(user_id):
     return User(user_id)
-
+#LOGIN REST API
 @app.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -72,18 +69,19 @@ def login():
             return render_template('login.html', error='Invalid username or password')
     else:
         return render_template('login.html')
-
+#PROTECTED PAGE (Q&A PAGE)
 @app.route('/protected')
 @login_required
 def protected():
     return render_template('protected.html')
-
+#LOGOUT OF WEBSITE (STILL IN PROTECTED PAGE)
 @app.route('/logout', methods=['GET', 'POST'])
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('login'))
 
+#FOR THE SIGNUP REST API
 class MyForm(FlaskForm):
     username = StringField('username')
     password = StringField('password')
@@ -101,4 +99,6 @@ def index():
             db.session.add(new_user)
             db.session.commit()
             return(render_template('login.html', error='Thank you for registering! Please login!'))
-    return(render_template('signup.html', form=form, error='Username already taken.'))
+        else:
+            return(render_template('signup.html', form=form, error='Username already taken.'))
+    return(render_template('signup.html', form=form, error = ""))

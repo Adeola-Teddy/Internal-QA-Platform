@@ -23,6 +23,7 @@ if not os.path.exists(os.path.join(basedir, 'mydatabase.sqlite')):
     conn.close()
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'mydatabase.sqlite')
+
 db = SQLAlchemy(app)
 # USER DATABASE #
 class UsersDB(db.Model):
@@ -72,6 +73,7 @@ class User(UserMixin):
 engine = create_engine('sqlite:///' + os.path.join(basedir, 'mydatabase.sqlite'))
 Session = sessionmaker(bind=engine)
 session = Session()
+
 #INBUILT FLASK_LOGIN
 @login_manager.user_loader
 def load_user(user_id):
@@ -149,7 +151,7 @@ class AnswerForm(FlaskForm):
     answer = StringField('answer')
     submit = SubmitField('Submit')
 
-@app.route('/protected/<int:question_id>', methods=['GET', 'POST'])
+@app.route('/protected/<int:question_id>', methods=['GET', 'POST', 'PUT'])
 @login_required
 def get_reply(question_id):
     answerForm = AnswerForm()
@@ -163,10 +165,11 @@ def get_reply(question_id):
 
     if request.method == 'POST':
         if answerForm.validate_on_submit():
+
             new_question = AnswerDB(author_id=answerAuthor.id, question_id=question_id, body=answerForm.answer.data, upvotes=0)
             db.session.add(new_question)
             db.session.commit()
-
+    
     answers = session.query(AnswerDB).filter_by(question_id=question_id).all()
 
     return render_template('thread.html', reply = reply,  user = qustionAuthor, form1 = answerForm, answers=answers)

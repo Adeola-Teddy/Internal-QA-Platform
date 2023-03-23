@@ -15,7 +15,7 @@
     <h2>Answers</h2>
     {% for answer in answers %}
     <div class="answer">
-      <h3>{{ answer.author_id }}</h3>
+      <h3>User: {{ userDB.filter_by(id=answer.author_id).first().username }}</h3>
       <p>{{ answer.body }}</p>
       <p>Upvotes: {{ answer.upvotes }}</p>
     </div>

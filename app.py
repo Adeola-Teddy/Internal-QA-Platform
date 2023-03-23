@@ -172,4 +172,4 @@ def get_reply(question_id):
     
     answers = session.query(AnswerDB).filter_by(question_id=question_id).all()
 
-    return render_template('thread.html', reply = reply,  user = qustionAuthor, form1 = answerForm, answers=answers)
+    return render_template('thread.html', reply = reply,  user = qustionAuthor, form1 = answerForm, answers=answers, userDB=session.query(UsersDB))

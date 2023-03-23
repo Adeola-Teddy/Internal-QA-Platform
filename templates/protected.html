@@ -4,7 +4,7 @@
   <title>Protected Page</title>
 </head>
 <body>
-  <h1>Welcome to the protected page!</h1>
+  <h1>Internal Q&A Platform!</h1>
   <p>You have successfully logged in {{user_logged}}.</p>
 
   <form class="question-form" method="POST">
@@ -19,8 +19,12 @@
       <h3>{{ question.author }}</h3>
       <p>{{ question.body }}</p>
       <form action="{{ url_for('get_reply', question_id=question.id) }}" method="GET">
-        <button type="submit">View/Send Answer</button>
+        <button type="submit">View Thread</button>
       </form>
+      <form action="{{ url_for('upvote', question_id=question.id) }}" method="POST">
+        <button type="submit" name="upvote">Upvote</button>
+      </form>
+      
       <p>Upvotes: {{ question.upvotes }}</p>
       <p>Replies:{{question.replies}}</p>
     </div>

@@ -18,6 +18,10 @@
       <h3>User: {{ userDB.filter_by(id=answer.author_id).first().username }}</h3>
       <p>{{ answer.body }}</p>
       <p>Upvotes: {{ answer.upvotes }}</p>
+      <form action="{{ url_for('upvote_answer',question_id = reply.id, answer_id=answer.id) }}" method="POST">
+        <button type="submit" name="upvote">Upvote</button>
+      </form>
+      
     </div>
   {% endfor %}
     <form action="{{ url_for('protected') }}" method="GET">

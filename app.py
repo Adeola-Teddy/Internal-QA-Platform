@@ -128,6 +128,7 @@ class QuestionForm(FlaskForm):
     question = StringField('question')
     submit = SubmitField('Submit')
 
+
 @app.route('/protected', methods=['GET', 'POST'])
 @login_required
 def protected():
@@ -135,6 +136,7 @@ def protected():
     username1 = s.replace('<User ', '').replace('>', '')
 
     question_form = QuestionForm()
+
     if request.method == 'POST':
         if question_form.validate_on_submit():
             user = UsersDB.query.filter_by(username=username1).first()
@@ -142,16 +144,22 @@ def protected():
             db.session.add(new_question)
             db.session.commit()
 
+
     questions = QuestionDB.query.all()
+    questionsDB = QuestionDB
+    #GETS ALL REPLIES#
+    for question in questions:
+        for answer in AnswerDB.query.filter_by(question_id=question.id).all():
+            question.replies += 1
 
-    return render_template('protected.html', user_logged=username1,  form1=question_form, questions=questions)
+    return render_template('protected.html', user_logged=username1,  form1=question_form, questions=questions, questionsDB=questionsDB )
 
-
+#ANSWER THREAD STUFF#
 class AnswerForm(FlaskForm):
     answer = StringField('answer')
     submit = SubmitField('Submit')
 
-@app.route('/protected/<int:question_id>', methods=['GET', 'POST', 'PUT'])
+@app.route('/protected/<int:question_id>', methods=['GET', 'POST','PUT'])
 @login_required
 def get_reply(question_id):
     answerForm = AnswerForm()
@@ -169,7 +177,33 @@ def get_reply(question_id):
             new_question = AnswerDB(author_id=answerAuthor.id, question_id=question_id, body=answerForm.answer.data, upvotes=0)
             db.session.add(new_question)
             db.session.commit()
-    
+
     answers = session.query(AnswerDB).filter_by(question_id=question_id).all()
 
     return render_template('thread.html', reply = reply,  user = qustionAuthor, form1 = answerForm, answers=answers, userDB=session.query(UsersDB))
+
+
+#UPVOTE STUFF#
+
+
+@app.route('/upvote/<int:question_id>', methods=['GET', 'POST'])
+@login_required
+def upvote(question_id):
+    question = QuestionDB.query.filter_by(id=question_id).first()
+    if request.method == 'POST' and 'upvote':
+        question.upvotes += 1
+        db.session.commit()
+    return protected()
+
+
+#ANSWERS UPVOTE STUFF#
+
+
+@app.route('/protected/<int:question_id>/<int:answer_id>', methods=['GET', 'POST'])
+@login_required
+def upvote_answer(question_id, answer_id):
+    question = AnswerDB.query.filter_by(id=answer_id).first()
+    if request.method == 'POST' and 'upvote':
+        question.upvotes += 1
+        db.session.commit()
+    return get_reply(question_id)

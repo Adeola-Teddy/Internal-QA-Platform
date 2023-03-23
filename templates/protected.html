@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Protected Page</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/protected.css') }}">
 </head>
 <body>
   <h1>Internal Q&A Platform!</h1>
@@ -26,7 +27,7 @@
       </form>
       
       <p>Upvotes: {{ question.upvotes }}</p>
-      <p>Replies:{{question.replies}}</p>
+      <p>Answers:{{question.replies}}</p>
     </div>
   {% endfor %}
 

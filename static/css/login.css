@@ -6,7 +6,7 @@ body {
     height: 100vh;
     font-family: Arial, Helvetica, sans-serif;
     color: white;
-    background-image: url("/static/img/foodbackground.jpg");
+    background-color: white;
     background-size: cover;
   }
 
@@ -18,16 +18,26 @@ form {
     align-items: center;
     flex-direction: column;
     flex-wrap: wrap;
-    background-image: linear-gradient(rgb(104, 88, 75), rgb(99, 77, 60));
+    background-image: linear-gradient(rgb(0, 0, 0), rgb(41, 41, 41));
+    border-radius: 10px;
 
 }
 
-form * {
+form > {
     border: 0px;
+    padding: 10px,10px,10px;
 }
 
 h1 {
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     font-weight: bolder;
     border: solid, 10px;
+}
+
+a {
+    padding-top: 5px;
+}
+
+p {
+    color: black;
 }

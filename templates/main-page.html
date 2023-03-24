@@ -5,8 +5,11 @@
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/protected.css') }}">
 </head>
 <body>
-  <h1>Internal Q&A Platform!</h1>
-  <p>You have successfully logged in {{user_logged}}.</p>
+  <header>
+    <h1>Internal Q&A Platform!</h1>
+    <img src="./static/images/logo.png">
+  </header>
+  <p>You have successfully logged in {{ user_logged }}.</p>
 
   <form class="question-form" method="POST">
     {{ form1.hidden_tag() }}
@@ -15,6 +18,10 @@
   </form>
 
   <h2>All Questions:</h2>
+  <form method="GET">
+    <button type="submit" name="sort_by" value="id">Sort by newest</button>
+    <button type="submit" name="sort_by" value="upvotes">Sort by Upvotes</button>
+  </form>
   {% for question in questions %}
     <div class="question">
       <h3>{{ question.author }}</h3>
@@ -25,12 +32,10 @@
       <form action="{{ url_for('upvote', question_id=question.id) }}" method="POST">
         <button type="submit" name="upvote">Upvote</button>
       </form>
-      
       <p>Upvotes: {{ question.upvotes }}</p>
-      <p>Answers:{{question.replies}}</p>
+      <p>Answers:{{ question.replies }}</p>
     </div>
   {% endfor %}
-
 
   <form action="{{ url_for('logout') }}" method="post">
     <input type="submit" value="Logout">

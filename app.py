@@ -137,6 +137,17 @@ def protected():
 
     question_form = QuestionForm()
 
+    sort_by = request.args.get('sort_by', 'upvotes')  # get the sort_by value from the request, default to 'upvotes'
+    if sort_by == 'id':
+        questions = QuestionDB.query.order_by(QuestionDB.id.desc()).all()
+    else:
+        questions = QuestionDB.query.order_by(QuestionDB.upvotes.desc()).all()
+        
+
+    # get the number of replies for each question
+    for question in questions:
+        question.replies = AnswerDB.query.filter_by(question_id=question.id).count()
+
     if request.method == 'POST':
         if question_form.validate_on_submit():
             user = UsersDB.query.filter_by(username=username1).first()
@@ -144,15 +155,7 @@ def protected():
             db.session.add(new_question)
             db.session.commit()
 
-
-    questions = QuestionDB.query.all()
-    questionsDB = QuestionDB
-    #GETS ALL REPLIES#
-    for question in questions:
-        for answer in AnswerDB.query.filter_by(question_id=question.id).all():
-            question.replies += 1
-
-    return render_template('protected.html', user_logged=username1,  form1=question_form, questions=questions, questionsDB=questionsDB )
+    return render_template('protected.html', user_logged=username1, form1=question_form, questions=questions, sort_by=sort_by)
 
 #ANSWER THREAD STUFF#
 class AnswerForm(FlaskForm):
@@ -178,7 +181,7 @@ def get_reply(question_id):
             db.session.add(new_question)
             db.session.commit()
 
-    answers = session.query(AnswerDB).filter_by(question_id=question_id).all()
+    answers = session.query(AnswerDB).filter_by(question_id=question_id).order_by(AnswerDB.upvotes.desc()).all()
 
     return render_template('thread.html', reply = reply,  user = qustionAuthor, form1 = answerForm, answers=answers, userDB=session.query(UsersDB))
 

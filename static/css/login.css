@@ -18,14 +18,16 @@ form {
     align-items: center;
     flex-direction: column;
     flex-wrap: wrap;
-    background-image: linear-gradient(rgb(0, 0, 0), rgb(41, 41, 41));
     border-radius: 10px;
-
 }
 
 form > {
     border: 0px;
     padding: 10px,10px,10px;
+}
+
+label {
+    
 }
 
 h1 {

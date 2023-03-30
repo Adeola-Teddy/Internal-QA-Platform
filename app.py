@@ -10,6 +10,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 app = Flask(__name__, static_url_path='/static')
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0')
 app.secret_key = 'your-secret-key'
 app.config['STATIC_FOLDER'] = 'static'
 # Set up login manager

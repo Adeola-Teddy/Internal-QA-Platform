@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Question {{reply.id}}</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/thread.css') }}">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/thread.css') }}">
+  <title>Question {{reply.id}}</title>
 </head>
 <body>
-    <h1>Question: {{reply.body}}</h1>
+    <h1>
+      <img src="/static/images/logo.svg">
+      Question: {{reply.body}}
+    </h1>
     <p>By: {{user.username}}</p>
     <form class="question-form" method="POST">
         {{ form1.hidden_tag() }}

@@ -1,0 +1,136 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: cadetblue;
+    color: #fff;
+  }
+
+p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+input#answer {width: auto;}
+
+.answer {
+    margin: 40px;
+}
+
+h1 {}
+
+input#answer {}
+  
+  /* Header Styles */
+  h1 {
+    margin-top: 50px;
+    text-align: center;
+    font-size: 36px;
+  }
+  
+  h2 {
+    margin-top: 30px;
+    font-size: 28px;
+    text-align: center;
+  }
+  
+  /* Answer Styles */
+  .answer {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #64c7fc;
+    border-radius: 5px;
+    background-color: rgb(97, 200, 255);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .answer h3 {
+    margin-top: 0;
+    font-size: 22px;
+  }
+  
+  .answer p {
+    font-size: 18px;
+    line-height: 1.5;
+  }
+  
+  .answer p:first-of-type {
+    margin-top: 10px;
+  }
+  
+  .answer p:last-of-type {
+    margin-bottom: 0;
+  }
+  
+  .answer button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .answer button:hover {
+    background-color: #0069d9;
+  }
+  
+  /* Form Styles */
+  .question-form {
+    margin-top: 30px;
+    text-align: center;
+  }
+  
+  .question-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+  
+  .question-form input[type="text"] {
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .question-form button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .question-form button[type="submit"]:hover {
+    background-color: #0069d9;
+  }
+  
+  /* Back Home Button Styles */
+  form:last-of-type {
+    margin-top: 50px;
+    text-align: center;
+  }
+  
+  form:last-of-type button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  form:last-of-type button:hover {
+    background-color: #0069d9;
+  }
+  

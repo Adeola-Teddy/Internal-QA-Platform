@@ -1,57 +1,67 @@
-/* Body style */
 body {
-    font-family: Arial, sans-serif;
-    background-image: #f7f7f7;
-  }
-  
-  /* Header style */
-  header {
-    background-color: #2e2e2e;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-  }
-  
-  /* Navigation menu style */
-  nav {
-    background-color: #4d4d4d;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
-  }
-  
-  /* Main content style */
-  main {
-    background-color: #fff;
-    padding: 20px;
-    margin: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Buttons style */
-  button {
-    background-color: #4d4d4d;
-    color: #fff;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  /* Form input style */
-  input[type="text"], textarea {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 20px;
-    margin-bottom: 20px;
-  }
-  
-  /* Footer style */
-  footer {
-    background-color: #2e2e2e;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-  }
-  
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  background-color: rgb(91, 165, 165);
+  color: white;
+  display: block;
+}
+
+input#question {
+    width: auto;
+}
+
+header {
+  background-color: #F1F1F1;
+  padding: 20px;
+  text-align: center;
+}
+
+img {
+    width: 40px;
+  display: flex;
+  justify-content:start;
+  align-items:center;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+.question-form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.question-form input[type="text"] {
+  padding: 5px;
+  border: 1px solid #ccc;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.question-form input[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.question-form input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.sort-form {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.question-list {
+  border: 1px solid;
+}

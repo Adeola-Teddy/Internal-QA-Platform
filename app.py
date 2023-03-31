@@ -215,3 +215,4 @@ def upvote_answer(question_id, answer_id):
         question.upvotes += 1
         db.session.commit()
     return get_reply(question_id)
+

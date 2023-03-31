@@ -5,27 +5,54 @@ body {
     flex-direction: column;
     height: 100vh;
     font-family: Arial, Helvetica, sans-serif;
-    color: white;
-    background-image: linear-gradient(70deg, rgb(255, 255, 255), rgb(255, 255, 255));
+    color: black;
     background-size: cover;
+    background-image: url(/static/images/background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
   }
 
 form {
-    height: 20vh;
-    width: 50vh;
+    background-color: rgb(255 255 255);
+    height: 49vh;
+    width: 80vh;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
     flex-direction: column;
-    flex-wrap: wrap;
-    background-image: linear-gradient(rgb(0, 0, 0), rgb(41, 41, 41));
-    border-radius: 10px;
+    border-radius: 22px;
+    padding: 20px;
+    right: 73px;
+    border-radius: 17px;
+    border-image: linear-gradient();
 
+    border-width: 9px;
+    border-style: solid;
+    border-image: linear-gradient(to right, #f090bb, #fbc2cd, #fadd8d, #82deab, #93ecea, #3ecacb, #00bfdc, #9ea3e4, #ca7ec4) 1;
 }
 
 form > {
     border: 0px;
     padding: 10px,10px,10px;
+}
+
+input {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    display: inline-block;
+    padding: 10px;
+    background-color: #eee;
+    border-radius: 25px;
+}
+input[type="submit" i] {
+    appearance: auto;
+    user-select: none;
+    white-space: pre;
+    align-items: flex-start;
+    text-align: center;
+    background-color: buttonface;
 }
 
 h1 {

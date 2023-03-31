@@ -10,6 +10,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 app = Flask(__name__, static_url_path='/static')
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0')
 app.secret_key = 'your-secret-key'
 app.config['STATIC_FOLDER'] = 'static'
 # Set up login manager
@@ -154,6 +156,7 @@ def protected():
             new_question = QuestionDB(author=user, body=question_form.question.data, upvotes=0, replies=0)
             db.session.add(new_question)
             db.session.commit()
+            return redirect(url_for('protected'), code=302)
 
     return render_template('protected.html', user_logged=username1, form1=question_form, questions=questions, sort_by=sort_by)
 
@@ -180,6 +183,8 @@ def get_reply(question_id):
             new_question = AnswerDB(author_id=answerAuthor.id, question_id=question_id, body=answerForm.answer.data, upvotes=0)
             db.session.add(new_question)
             db.session.commit()
+            return redirect(url_for('protected'), code=302)
+
 
     answers = session.query(AnswerDB).filter_by(question_id=question_id).order_by(AnswerDB.upvotes.desc()).all()
 

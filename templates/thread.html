@@ -15,7 +15,7 @@
     <p>By: {{user.username}}</p>
     <form class="question-form" method="POST">
         {{ form1.hidden_tag() }}
-        {{ form1.answer.label }} {{ form1.answer() }}<br>
+        {{ form1.answer() }}<br>
         {{ form1.submit() }}
       </form>
 

@@ -12,11 +12,13 @@
   <img src="static/images/logo.svg">
 </header>
 <body>
+  <img src="./static/images/logo.png">
+  <h1>Internal Q&A Platform!</h1>
   <p>You have successfully logged in {{ user_logged }}.</p>
 
   <form class="question-form" method="POST">
     {{ form1.hidden_tag() }}
-    {{ form1.question.label }} {{ form1.question() }}<br>
+    {{ form1.question() }}<br>
     {{ form1.submit() }}
   </form>
 

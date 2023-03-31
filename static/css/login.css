@@ -5,7 +5,7 @@ body {
     flex-direction: column;
     height: 100vh;
     font-family: Arial, Helvetica, sans-serif;
-    color: white;
+    color: black;
     background-size: cover;
     background-image: url(/static/images/background.png);
     background-repeat: no-repeat;
@@ -14,20 +14,22 @@ body {
   }
 
 form {
-    background-color: rgb(91, 165, 165);
+    background-color: rgb(255 255 255);
     height: 49vh;
     width: 80vh;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     flex-direction: column;
-    flex-wrap: wrap;
-    border-radius: 10px;
+    border-radius: 22px;
     padding: 20px;
-    border-radius: 5px;
-    margin: auto;
-    margin-right: 73px;
+    right: 73px;
     border-radius: 17px;
+    border-image: linear-gradient();
+
+    border-width: 9px;
+    border-style: solid;
+    border-image: linear-gradient(to right, #f090bb, #fbc2cd, #fadd8d, #82deab, #93ecea, #3ecacb, #00bfdc, #9ea3e4, #ca7ec4) 1;
 }
 
 form > {
@@ -50,16 +52,7 @@ input[type="submit" i] {
     white-space: pre;
     align-items: flex-start;
     text-align: center;
-    cursor: default;
-    box-sizing: border-box;
     background-color: buttonface;
-    color: buttontext;
-    padding: 1px 6px;
-    border-width: 2px;
-    border-style: outset;
-    border-color: buttonborder;
-    border-image: initial;
-    cursor: pointer;
 }
 
 h1 {

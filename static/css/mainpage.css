@@ -3,9 +3,22 @@ body {
   margin: 0;
   padding: 0;
   width: auto;
-  background-color: rgb(91, 165, 165);
-  color: white;
-  display: block;
+  background-color: rgb(255 255 255);
+  color: black;
+  display: grid;
+  grid-template-rows: auto;
+}
+
+button[type="submit"] {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+form > button {
+    display: flex;
+    justify-content: center;
+    align-content: space-around;
+    flex-wrap: wrap;
 }
 
 input#question {
@@ -14,15 +27,23 @@ input#question {
 
 header {
   background-color: #F1F1F1;
-  padding: 20px;
   text-align: center;
+  /* display: flex; */
+  /* justify-content: flex-start; */
+}
+
+
+
+h1 {
+    display: flex;
+    justify-content: flex-start;
 }
 
 img {
     width: 40px;
-  display: flex;
-  justify-content:start;
-  align-items:center;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 .container {
@@ -40,16 +61,27 @@ img {
 .question-form input[type="text"] {
   padding: 5px;
   border: 1px solid #ccc;
-  width: 100%;
-  margin-bottom: 10px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  border-image: linear-gradient(#f090bb, #fbc2cd, #fadd8d, #82deab, #93ecea, #3ecacb, #00bfdc, #9ea3e4, #ca7ec4) 1;
 }
 
 .question-form input[type="submit"] {
-  background-color: #4CAF50;
-  color: white;
+  border-image: linear-gradient(#f090bb, #fbc2cd, #fadd8d, #82deab, #93ecea, #3ecacb, #00bfdc, #9ea3e4, #ca7ec4) 1;
+  color: black;
   padding: 10px 20px;
-  border: none;
+  border-style: solid;
   cursor: pointer;
+  background-color: #93ecea;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  width: 311px;
+  font-size: 18px;
 }
 
 .question-form input[type="submit"]:hover {

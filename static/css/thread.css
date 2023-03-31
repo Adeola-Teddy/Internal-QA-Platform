@@ -3,8 +3,8 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: cadetblue;
-    color: #fff;
+    background-color: white;
+    color: #000;
   }
 
 p {
@@ -14,7 +14,7 @@ p {
     font-size: 24px;
 }
 
-input#answer {width: auto;}
+input#answer {width: 700px;border-radius: 40px;}
 
 .answer {
     margin: 40px;
@@ -37,9 +37,9 @@ input#answer {width: auto;}
   .answer {
     margin-top: 20px;
     padding: 10px;
-    border: 1px solid #64c7fc;
+    border-image: linear-gradient(#f090bb, #fbc2cd, #fadd8d, #82deab, #93ecea, #3ecacb, #00bfdc, #9ea3e4, #ca7ec4);
     border-radius: 5px;
-    background-color: rgb(97, 200, 255);
+    background-color: #fadd8d;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
   }
   
